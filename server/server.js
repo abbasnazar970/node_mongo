@@ -4,20 +4,26 @@ mongoose.connect("mongodb://localhost:27017/ToDo");
 
 var Todo = mongoose.model('Todo',{
     text:{
-        type:String
+        type:String,
+        required : true,
+        minlength : 1,
+        trim : true
     },
     completed:{
-        type: Boolean
+        type: Boolean,
+        default : false
     },
     CompletedAt:{
-        type : Number
+        type : Number,
+        default : null
+
     }
 
 });
 
 var newToDo = new Todo({
-    text : 'eat',
-    completed : false,
+    text : '   eat it  ',
+    completed : true,
     CompletedAt : 2018
 });
 
