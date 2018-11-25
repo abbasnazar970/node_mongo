@@ -36,6 +36,14 @@ app.get('/todos/:id',(req,res)=>{
     })
 });
 
+app.delete('/todos/:id',(req,res)=>{
+    Todo.findByIdAndRemove(req.params.id).then((doc)=>{
+            res.send({todos: doc});
+    },(err)=>{
+        res.status(400).send(err);
+    })
+});
+
 app.listen(3000,()=>{
     console.log('Server started on 3000')
 })
