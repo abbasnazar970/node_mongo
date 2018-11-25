@@ -20,6 +20,21 @@ app.post('/todos',(req,res)=>{
     })
 });
 
+app.get('/todos',(req,res)=>{
+    Todo.find().then((doc)=>{
+            res.send({todos: doc});
+    },(err)=>{
+        res.status(400).send(err);
+    })
+});
+
+app.get('/todos/:id',(req,res)=>{
+    Todo.findById(req.params.id).then((doc)=>{
+            res.send({todos: doc});
+    },(err)=>{
+        res.status(400).send(err);
+    })
+});
 
 app.listen(3000,()=>{
     console.log('Server started on 3000')
