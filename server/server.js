@@ -44,6 +44,14 @@ app.delete('/todos/:id',(req,res)=>{
     })
 });
 
+app.patch('/todos/:id',(req,res)=>{
+    Todo.findByIdAndUpdate(req.params.id,{$set : { text : req.body.text}},{new : true}).then((doc)=>{
+            res.send({todos: doc});
+    },(err)=>{
+        res.status(400).send(err);
+    })
+});
+
 app.listen(3000,()=>{
     console.log('Server started on 3000')
 })
