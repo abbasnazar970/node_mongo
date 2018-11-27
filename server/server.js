@@ -26,9 +26,11 @@ app.post('/newUser',(req,res)=>{
         password : req.body.password
     });
     user.save().then((doc)=>{
-            res.send(doc);
-    },(err)=>{
-        res.status(400).send(err);
+            return user.generateAuthToken();
+    }).then((token)=>{
+            res.header('x-auth',token).send(user);
+    }).catch((e)=>{
+            res.status(400).send(e);
     })
 });
 
